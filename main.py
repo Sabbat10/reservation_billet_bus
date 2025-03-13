@@ -3,7 +3,7 @@ from bus_reservation.bus_reservation import afficher_liste_de_voyage_disponible,
 
 while True:
    print("")
-   choix_operation = input("1 - Voir les voyages disponibles \n2 - Chercher un voyages\n3 - Reserver un trajet\n4 - quitter \nchoix  : ")
+   choix_operation = input("1 - Voir les voyages disponibles \n2 - Chercher un voyages\n3 - Reserver un trajet\n4 - Imprimer la facture \n5 - Quitter \nchoix  : ")
    print("")
    
    if choix_operation == "1":
@@ -76,7 +76,14 @@ while True:
             "siege" : "Siege choisit"
         }
        print(tabulate([{"nom" : nom, "prenom" : prenom, "age" : age, "ville_de_depart" : depart, "ville_d_arriver" : arriver, "siege" : choisir_siege}], headers=header, tablefmt="grid"))
-    
+       
    elif choix_operation == "4":
+    #    with open("facture.txt", "w") as f:
+    #        contenus = tabulate([{"nom" : nom, "prenom" : prenom, "age" : age, "ville_de_depart" : depart, "ville_d_arriver" : arriver, "siege" : choisir_siege}], headers=header, tablefmt="grid")
+    #        f.write(contenus)
+        print("Fonctionalité non disponible pour le moment !")
+     
+     
+   elif choix_operation == "5":
        print("Fin du programme !")
        break
