@@ -1,5 +1,5 @@
 from tabulate import tabulate
-from bus_reservation import afficher_liste_de_voyage_disponible, rechercher_voyage, reservation_bus, reservation_siege
+from bus_reservation.bus_reservation import afficher_liste_de_voyage_disponible, rechercher_voyage, reservation_bus, reservation_siege
 
 while True:
    print("")
