@@ -24,6 +24,7 @@ Avant de commencer, assure-toi d'avoir :
 ### 1. Cloner le dépôt (ou copier les fichiers)
 
 ```bash
+mkdir bus-reservation
 git clone https://github.com/Sabbat10/reservation_billet_bus.git
 cd bus-reservation
 
