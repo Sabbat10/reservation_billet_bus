@@ -1,3 +1,4 @@
+from tabulate import tabulate
 from bus_reservation import afficher_liste_de_voyage_disponible, rechercher_voyage, reservation_bus, reservation_siege
 
 while True:
@@ -59,12 +60,22 @@ while True:
        age = input("Age : ")
        
        print("== Voici votre facture :")
-       print(f"Nom : {nom}")
-       print(f"Prenom : {prenom}")
-       print(f"Age : {age}")
-       print(f"Ville de depart : {depart}")
-       print(f"Ville d'arriver : {arriver}")
-       print(f"Siege choisit : {choisir_siege}")
+    #    print(f"Nom : {nom}")
+    #    print(f"Prenom : {prenom}")
+    #    print(f"Age : {age}")
+    #    print(f"Ville de depart : {depart}")
+    #    print(f"Ville d'arriver : {arriver}")
+    #    print(f"Siege choisit : {choisir_siege}")
+    
+       header = {
+            "nom" : "Nom",
+            "prenom" : "Prenom",
+            "age" : "Age",
+            "ville_de_depart" : "Ville de depart",
+            "ville_d_arriver" : "Ville d'arriver",
+            "siege" : "Siege choisit"
+        }
+       print(tabulate([{"nom" : nom, "prenom" : prenom, "age" : age, "ville_de_depart" : depart, "ville_d_arriver" : arriver, "siege" : choisir_siege}], headers=header, tablefmt="grid"))
     
    elif choix_operation == "4":
        print("Fin du programme !")
