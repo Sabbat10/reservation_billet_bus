@@ -24,7 +24,7 @@ Avant de commencer, assure-toi d'avoir :
 ### 1. Cloner le dépôt (ou copier les fichiers)
 
 ```bash
-git clone https://github.com/votre-utilisateur/bus-reservation.git
+git clone https://github.com/Sabbat10/reservation_billet_bus.git
 cd bus-reservation
 
 ```
