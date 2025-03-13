@@ -1,8 +1,8 @@
-from bus_reservation import afficher_liste_de_voyage_disponible, rechercher_voyage, reservation_siege
+from bus_reservation import afficher_liste_de_voyage_disponible, rechercher_voyage, reservation_bus, reservation_siege
 
 while True:
    print("")
-   choix_operation = input("1 - Voir les voyages disponibles \n2 - Chercher un voyages\n3 - Reserver un siege\n4 - quitter \nchoix  : ")
+   choix_operation = input("1 - Voir les voyages disponibles \n2 - Chercher un voyages\n3 - Reserver un trajet\n4 - quitter \nchoix  : ")
    print("")
    
    if choix_operation == "1":
@@ -16,6 +16,30 @@ while True:
     
    elif choix_operation == "3":
        
+    #    print("== Voici les siege disponible ==")
+    #    reservation_siege()
+       
+       
+    #    print("")
+    #    choisir_siege = input("choisir un siege : ")
+       
+    #    if choisir_siege.isdigit() and 1 <= int(choisir_siege) <= 21:
+    #        print(f"vous avez choisit le siege : {choisir_siege}🪑 ", )
+    #    else:
+    #        print("La siege n'est pas disponible !")
+    
+       print("== Voici les siege disponible ==")
+       afficher_liste_de_voyage_disponible()
+       
+       print("")
+       print("== Choissez trajet ==")
+       depart = input("Entrer ville de depart : ")
+       arriver = input("Entrer ville d'arriver : ")
+       reservation_bus(depart, arriver)
+       
+       print("")
+       
+       print("== Choissez un  siege ==")
        print("== Voici les siege disponible ==")
        reservation_siege()
        
@@ -27,7 +51,20 @@ while True:
            print(f"vous avez choisit le siege : {choisir_siege}🪑 ", )
        else:
            print("La siege n'est pas disponible !")
+           
+       print("")
+       print("== Informations du passager ==")
+       nom = input("Nom : ")
+       prenom = input("Prenom : ")
+       age = input("Age : ")
        
+       print("== Voici votre facture :")
+       print(f"Nom : {nom}")
+       print(f"Prenom : {prenom}")
+       print(f"Age : {age}")
+       print(f"Ville de depart : {depart}")
+       print(f"Ville d'arriver : {arriver}")
+       print(f"Siege choisit : {choisir_siege}")
     
    elif choix_operation == "4":
        print("Fin du programme !")

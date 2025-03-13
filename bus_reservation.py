@@ -57,3 +57,14 @@ def reservation_siege():
         print(f"{i}🪑", end=' ')
         if i % 5 == 0:
             print()  # Revenir à la ligne après chaque groupe de 5 nombres
+
+# reservation bus
+
+def reservation_bus(ville_depart, ville_arriver):
+    for index, trajet in enumerate(bus_disponible):
+        if ville_depart.strip().lower() == trajet['ville_de_depart'].strip().lower() and ville_arriver.strip().lower() == trajet['ville_d_arriver'].strip().lower():
+            print("")
+            print(f"Vous avez choisit de voyager dès : {trajet['ville_de_depart'].capitalize()} - {trajet['ville_d_arriver'].capitalize()}")
+            return
+    print("")
+    print("Trajet non disponible pour le moment")
