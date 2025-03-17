@@ -5,7 +5,7 @@ Un **système de réservation de bus** en Python qui permet aux utilisateurs de 
 1. 🗺️ **Afficher les trajets disponibles**
 2. 🔍 **Rechercher un voyage spécifique**
 3. 🪑 **Réserver un trajet et un siège**
-4. 🧾 **Générer une facture** (à venir)
+4. 🧾 **Générer une facture**
 5. ❌ **Quitter l'application**
 
 ---
@@ -71,8 +71,7 @@ python main.py
    Choisir un siège (entre 1 et 21).
    Saisir les informations du passager (nom, prénom, âge).
    📊 Générer une facture en format tabulaire.
-4. 🧾 Imprimer une facture (Fonctionnalité à venir)
-   Une future fonctionnalité pour générer un fichier PDF ou texte contenant la facture.
+4. 🧾 Imprimer une facture - (une facture est généré dans votre dossier ave le nom de facture_bus.txt)
 5. ❌ Quitter le programme
    Arrête l'application proprement.
 

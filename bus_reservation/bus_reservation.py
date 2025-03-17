@@ -1,4 +1,5 @@
 from bus_reservation.data import bus_disponible
+from tabulate import tabulate
 
 print("==" * 40)
 print("== Voici la liste des voyages disponibles ! ==")
@@ -43,4 +44,21 @@ def reservation_bus(ville_depart, ville_arriver):
     afficher_liste_de_voyage_disponible()
     
     
-# def facture(nom, prenom, age, ville_de_depart, ville_d_arriver, choisir_siege):
+def generer_facture(nom, prenom, age, depart, arriver, choisir_siege):
+    header = {
+        "nom": "Nom",
+        "prenom": "Prenom",
+        "age": "Age",
+        "ville_de_depart": "Ville de depart",
+        "ville_d_arriver": "Ville d'arriver",
+        "siege": "Siege choisit"
+    }
+    facture = tabulate([{
+        "nom": nom,
+        "prenom": prenom,
+        "age": age,
+        "ville_de_depart": depart,
+        "ville_d_arriver": arriver,
+        "siege": choisir_siege
+    }], headers=header, tablefmt="grid")
+    return facture
