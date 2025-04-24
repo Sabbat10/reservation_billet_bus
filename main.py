@@ -1,19 +1,26 @@
-
-from bus_reservation.bus_reservation import afficher_liste_de_voyage_disponible, rechercher_voyage, reservation_bus, reservation_siege, generer_facture
+from bus_reservation.bus_reservation import afficher_liste_de_voyage_disponible, rechercher_voyage, reservation_bus, reservation_siege, generer_facture, generer_facture_pdf
 
 while True:
    print("")
-   choix_operation = input("1 - Voir les voyages disponibles \n2 - Chercher un voyages\n3 - Reserver un trajet\n4 - Imprimer la facture \n5 - Quitter \nchoix  : ")
+   choix_operation = input("🚌 1 - Voir les voyages disponibles\n🔍 2 - Chercher un voyage\n📝 3 - Réserver un trajet\n🧾 4 - Imprimer la facture\n❌ 5 - Quitter\n👉 Choix : ")
+
    print("")
    
    if choix_operation == "1":
+       print("== Voici les siege disponible ==")
        afficher_liste_de_voyage_disponible()
        
    elif choix_operation == "2":
-       depart = input("Entrer ville de depart : ")
-       arriver = input("Entrer ville d'arriver : ")
        
-       rechercher_voyage(depart, arriver)
+    
+    depart = input("Entrer ville de depart : ")
+    arriver = input("Entrer ville d'arriver : ")
+    
+    if depart == "" or arriver == "":
+        print("")
+        print("❌Veuillez entrer une ville de depart et une ville d'arriver")
+    else:
+        rechercher_voyage(depart, arriver)
     
    elif choix_operation == "3":
     
@@ -54,11 +61,7 @@ while True:
        
    elif choix_operation == "4":
     try:
-        facture = generer_facture(nom, prenom, age, depart, arriver, choisir_siege)
-        with open("facture_bus.txt", "w") as f:
-            f.write(f"Facture de {prenom} {nom} \n")
-            f.write(facture)
-            
+        facture = generer_facture_pdf(nom, prenom, age, depart, arriver, choisir_siege)
         print("Facture généré ave succès !")
     except NameError:
         print("Aucune réservation trouvée. Veuillez d'abord réserver un trajet.")
