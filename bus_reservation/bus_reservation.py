@@ -1,7 +1,9 @@
 from bus_reservation.data import bus_disponible
 from tabulate import tabulate
 from reportlab.lib.pagesizes import A4
-from reportlab.pdfgen import canvas
+from reportlab.lib import colors
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph
 
 print("==" * 40)
 print("== Voici la liste des voyages disponibles ! ==")
@@ -14,7 +16,7 @@ def afficher_liste_de_voyage_disponible():
 
 # recherher un yoyage disponible
 def rechercher_voyage(ville_depart, ville_arriver):
-    for index, trajet in enumerate(bus_disponible):
+    for trajet in bus_disponible:
         
         # convertir les ville en minuscule
         ville_depart.strip().lower()
@@ -49,32 +51,7 @@ def reservation_bus(ville_depart, ville_arriver):
     print("== Voici la liste des voyages disponibles ! ==")
     afficher_liste_de_voyage_disponible()
     
-    
-# def generer_facture(nom, prenom, age, depart, arriver, choisir_siege):
-#     header = {
-#         "nom": "Nom",
-#         "prenom": "Prenom",
-#         "age": "Age",
-#         "ville_de_depart": "Ville de depart",
-#         "ville_d_arriver": "Ville d'arriver",
-#         "siege": "Siege choisit"
-#     }
-    
-#     data = {
-#         "nom": nom,
-#         "prenom": prenom,
-#         "age": age,
-#         "ville_de_depart": depart,
-#         "ville_d_arriver": arriver,
-#         "siege": choisir_siege
-#     }
-    
-#     facture = tabulate(data, headers=header, tablefmt="grid")
-#     return facture
-
-
-from tabulate import tabulate
-
+# Generation de facture
 def generer_facture(nom, prenom, age, depart, arriver, choisir_siege):
     header = ["Nom", "Prénom", "Âge", "Ville de départ", "Ville d'arrivée", "Siège choisi"]
     
@@ -83,40 +60,41 @@ def generer_facture(nom, prenom, age, depart, arriver, choisir_siege):
     facture = tabulate(data, headers=header, tablefmt="grid")
     return facture
 
-
-# Generer une facture PDF
+# Generation de facture
 def generer_facture_pdf(nom, prenom, age, depart, arriver, choisir_siege):
-    # Créer un canvas PDF
-    c = canvas.Canvas("facture_bus.pdf", pagesize=A4)
-    width, height = A4
-    y = height - 50
+    doc = SimpleDocTemplate("facture_bus.pdf", pagesize=A4)
+    elements = []
 
-    # Titre
-    c.setFont("Helvetica-Bold", 16)
-    c.drawCentredString(width / 2, y, "🧾 FACTURE DE RÉSERVATION")
-    y -= 40
+    styles = getSampleStyleSheet()
+    title = Paragraph("🧾 <b>FACTURE DE RÉSERVATION</b>", styles["Title"])
+    elements.append(title)
 
-    # Informations du passager
-    c.setFont("Helvetica", 12)
-    c.drawString(100, y, f"👤 Nom : {nom}")
-    y -= 20
-    c.drawString(100, y, f"🧒 Prénom : {prenom}")
-    y -= 20
-    c.drawString(100, y, f"🎂 Âge : {age} ans")
-    y -= 20
+    # Données de la facture sous forme de tableau
+    data = [
+        ["👤 Nom", nom.capitalize()],
+        ["🧒 Prénom", prenom.capitalize()],
+        ["🎂 Âge", f"{age} ans"],
+        ["🚏 Ville de départ", depart.capitalize()],
+        ["🛬 Ville d'arrivée", arriver.capitalize()],
+        ["🪑 Siège choisi", choisir_siege]
+    ]
 
-    # Informations sur le trajet
-    c.drawString(100, y, f"🚏 Ville de départ : {depart}")
-    y -= 20
-    c.drawString(100, y, f"🛬 Ville d'arrivée : {arriver}")
-    y -= 20
-    c.drawString(100, y, f"🪑 Siège choisi : {choisir_siege}")
-    y -= 30
+    table = Table(data, colWidths=[150, 250])
+    table.setStyle(TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), colors.lightblue),
+        ('TEXTCOLOR', (0, 0), (-1, -1), colors.darkblue),
+        ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
+        ('FONTNAME', (0, 0), (-1, -1), 'Helvetica'),
+        ('FONTSIZE', (0, 0), (-1, -1), 12),
+        ('BOX', (0, 0), (-1, -1), 1, colors.grey),
+        ('INNERGRID', (0, 0), (-1, -1), 0.5, colors.grey),
+        ('BOTTOMPADDING', (0, 0), (-1, -1), 6),
+    ]))
 
-    # Pied de page
-    c.setFont("Helvetica-Oblique", 10)
-    c.drawString(100, y, "Merci d'avoir voyagé avec nous ! Bon trajet 🚌")
-    
-    # Enregistrement du PDF
-    c.save()
+    elements.append(table)
+
+    # Note de bas de page
+    elements.append(Paragraph("🚍 Merci d'avoir voyagé avec nous !", styles["Normal"]))
+
+    doc.build(elements)
     print("✅ Facture PDF générée avec succès : facture_bus.pdf")
